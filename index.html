@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Periodic Table Quiz</title>
+<title>Periodic Mastery - Navigable</title>
 <style>
 :root {
     /* --- COLOR PALETTE --- */
@@ -68,20 +68,14 @@ body {
 
 /* --- GLASS / PANEL STYLES --- */
 .glass-panel {
-    /* Clearer Glass: Lower opacity on the dark background */
     background: rgba(15, 23, 42, 0.3); 
-    
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
-    
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    
-    /* Subtle borders */
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-top: 1px solid rgba(255, 255, 255, 0.15);
-    
     position: relative;
     overflow: hidden;
     transition: background 0.3s, border 0.3s, box-shadow 0.3s;
@@ -89,46 +83,23 @@ body {
 
 /* --- FLAT UI MODE OVERRIDES --- */
 body.flat-ui .glass-panel {
-    background: #1e293b; /* Solid Slate 800 */
+    background: #1e293b; 
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border: 1px solid #334155;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
-
-body.flat-ui .element {
-    backdrop-filter: none;
-    background: #334155;
-    border-color: #475569;
-}
-body.flat-ui .element:hover {
-    background: #475569;
-}
-body.flat-ui .btn {
-    backdrop-filter: none;
-    background: #334155;
-    border: 1px solid transparent;
-}
-body.flat-ui .btn:hover {
-    background: var(--accent-color);
-}
-body.flat-ui .btn-secondary:hover {
-    background: #475569;
-}
-body.flat-ui input[type="text"] {
-    background: #0f172a;
-    border-color: #334155;
-}
-body.flat-ui .score-circle {
-    background: #1e293b;
-    backdrop-filter: none;
-    border-color: #334155;
-}
+body.flat-ui .element { backdrop-filter: none; background: #334155; border-color: #475569; }
+body.flat-ui .element:hover { background: #475569; }
+body.flat-ui .btn { backdrop-filter: none; background: #334155; border: 1px solid transparent; }
+body.flat-ui .btn:hover { background: var(--accent-color); }
+body.flat-ui .btn-secondary:hover { background: #475569; }
+body.flat-ui input[type="text"] { background: #0f172a; border-color: #334155; }
+body.flat-ui .score-circle { background: #1e293b; backdrop-filter: none; border-color: #334155; }
 
 h1.title {
     font-size: 4.5rem; font-weight: 700; margin: 0 0 40px 0; text-align: center; letter-spacing: -0.02em;
-    color: white;
-    text-shadow: 0 0 30px var(--accent-glow);
+    color: white; text-shadow: 0 0 30px var(--accent-glow);
 }
 
 /* --- ATOM --- */
@@ -160,27 +131,24 @@ h1.title {
     color: white; 
     border: 1px solid rgba(255,255,255,0.08); 
     padding: 16px 32px;
-    border-radius: 14px; /* Slightly squarer than pill */
+    border-radius: 14px; 
     font-weight: 500; font-size: 1.05rem; cursor: pointer;
     transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    
-    /* Removed All Caps */
-    text-transform: none; 
-    letter-spacing: -0.01em;
+    text-transform: none; letter-spacing: -0.01em;
 }
-
 .btn:hover { 
     transform: translateY(-2px); 
-    background: var(--accent-color); 
-    border-color: var(--accent-color);
+    background: var(--accent-color); border-color: var(--accent-color);
     box-shadow: 0 8px 25px var(--accent-glow); 
-    color: #0f172a;
-    font-weight: 600;
+    color: #0f172a; font-weight: 600;
 }
 .btn:active { transform: scale(0.96); }
 
 .btn-secondary { background: transparent; color: var(--text-secondary); border-color: transparent; }
 .btn-secondary:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.15); box-shadow: none; }
+
+.btn-finish { background: rgba(248, 113, 113, 0.15); color: #fca5a5; border-color: rgba(248, 113, 113, 0.3); }
+.btn-finish:hover { background: var(--danger-color); border-color: var(--danger-color); color: white; box-shadow: 0 5px 20px rgba(248, 113, 113, 0.4); }
 
 /* --- TABLE --- */
 .periodic-table { display: grid; grid-template-columns: repeat(18, 1fr); gap: 4px; width: 100%; overflow-x: auto; padding-bottom: 10px; }
@@ -196,18 +164,8 @@ h1.title {
 }
 .element strong { font-size: clamp(9px, 1.2vw, 15px); font-weight: 600; }
 .element small { font-size: 8px; position: absolute; top: 3px; left: 3px; color: var(--text-secondary); }
-.element:hover { 
-    background: rgba(255,255,255,0.15); 
-    border-color: rgba(255,255,255,0.5); 
-    transform: scale(1.1); 
-    z-index: 50; 
-}
-.element.selected { 
-    background: var(--accent-color) !important; 
-    color: #0f172a !important; 
-    border-color: var(--accent-color) !important; 
-    box-shadow: 0 0 20px var(--accent-glow); 
-}
+.element:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); transform: scale(1.1); z-index: 50; }
+.element.selected { background: var(--accent-color) !important; color: #0f172a !important; border-color: var(--accent-color) !important; box-shadow: 0 0 20px var(--accent-glow); }
 .element.selected small { color: rgba(0,0,0,0.5); }
 
 /* --- QUIZ UI --- */
@@ -220,11 +178,7 @@ h1.title {
 }
 .quiz-panel h3 { color: white; margin-top: 0; font-size: 1.4rem; font-weight: 600; }
 .input-group { margin-bottom: 20px; }
-.input-group label { 
-    display: block; color: var(--text-secondary); 
-    margin-bottom: 8px; font-size: 0.9rem; font-weight: 500;
-    text-transform: none; /* No Caps */
-}
+.input-group label { display: block; color: var(--text-secondary); margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; text-transform: none; }
 input[type="text"] {
     width: 100%; padding: 14px; 
     background: rgba(0, 0, 0, 0.2); 
@@ -233,10 +187,12 @@ input[type="text"] {
     box-sizing: border-box; font-family: var(--font-main); font-size: 1.05rem;
     transition: all 0.2s;
 }
-input[type="text"]:focus { 
-    outline: none; 
-    border-color: var(--accent-color); 
-    background: rgba(0,0,0,0.4); 
+input[type="text"]:focus { outline: none; border-color: var(--accent-color); background: rgba(0,0,0,0.4); }
+
+.quiz-controls {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
 }
 
 /* --- REPORT UI --- */
@@ -244,11 +200,8 @@ input[type="text"]:focus {
 .score-card { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 .score-circle {
     width: 180px; height: 180px; border-radius: 50%;
-    /* Glass Circle */
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
-    
     display: flex; justify-content: center; align-items: center;
     font-size: 3.5rem; font-weight: 700; color: white;
     box-shadow: 0 0 40px var(--accent-glow); margin-bottom: 25px;
@@ -273,7 +226,6 @@ input[type="text"]:focus {
 .swatch:hover { transform: scale(1.1); border-color: white; }
 .swatch.active { border-color: white; transform: scale(1.1); box-shadow: 0 0 15px var(--accent-glow); }
 
-/* Switch Toggle for Flat Mode */
 .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 34px; }
@@ -326,6 +278,17 @@ input:checked + .slider:before { transform: translateX(24px); }
         document.body.style.setProperty('--mouse-x', x);
         document.body.style.setProperty('--mouse-y', y);
     });
+
+    // KEYBOARD NAVIGATION
+    document.addEventListener('keydown', (e) => {
+        if(curScreen === 'test') {
+            // Only navigate if focus is NOT on an input field (so user can type)
+            if(document.activeElement.tagName !== 'INPUT') {
+                if(e.key === 'ArrowRight') nextQ();
+                if(e.key === 'ArrowLeft') prevQ();
+            }
+        }
+    });
 </script>
 
 <div id="menuScreen" class="screen active">
@@ -336,7 +299,7 @@ input:checked + .slider:before { transform: translateX(24px); }
             <div class="orbit"></div>
             <div class="orbit"></div>
         </div>
-        <h1 class="title">Periodic<br>Table Quiz</h1>
+        <h1 class="title">Periodic<br>Mastery</h1>
         <div class="glass-panel" style="display:flex; flex-direction:column; gap:12px; width: 260px; padding: 25px;">
             <button class="btn" onmouseenter="AudioFx.hover()" onclick="nav('setup')">Begin Study</button>
             <button class="btn btn-secondary" onmouseenter="AudioFx.hover()" onclick="toggleSettings()">Settings</button>
@@ -407,7 +370,7 @@ input:checked + .slider:before { transform: translateX(24px); }
 
 <div id="testScreen" class="screen">
     <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <button class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;" onclick="generateReport()">Quit</button>
+        <button class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;" onclick="nav('setup')">Cancel</button>
         <div id="progressDisplay" style="font-weight: 600; color: white; background: rgba(255,255,255,0.1); padding: 8px 20px; border-radius: 20px;">1 / 10</div>
     </div>
     
@@ -418,7 +381,12 @@ input:checked + .slider:before { transform: translateX(24px); }
         <div class="glass-panel quiz-panel" style="display:flex; flex-direction: column;">
             <h3 id="qHeader">Question</h3>
             <div id="inputs"></div>
-            <button id="nextBtn" class="btn" style="width:100%; margin-top: auto;" onclick="nextQ()">Next</button>
+            
+            <div class="quiz-controls">
+                <button id="prevBtn" class="btn btn-secondary" style="width:50px;" onclick="prevQ()">←</button>
+                <button class="btn btn-finish" style="flex:1;" onclick="generateReport()">Finish</button>
+                <button id="nextBtn" class="btn" style="flex:2;" onclick="nextQ()">Next →</button>
+            </div>
         </div>
     </div>
 </div>
@@ -642,9 +610,14 @@ function loadQ(idx) {
         </div>`;
     });
 
+    // Update Buttons
     const btn = document.getElementById('nextBtn');
-    btn.innerText = (curIdx === curTest.length - 1) ? "Finish" : "Next";
+    btn.innerText = (curIdx === curTest.length - 1) ? "Finish" : "Next →";
     btn.onclick = (curIdx === curTest.length - 1) ? generateReport : nextQ;
+    
+    // Disable prev button if start
+    document.getElementById('prevBtn').disabled = (curIdx === 0);
+    document.getElementById('prevBtn').style.opacity = (curIdx === 0) ? 0.5 : 1;
 
     setTimeout(() => {
         const first = ct.querySelector('input');
@@ -654,6 +627,11 @@ function loadQ(idx) {
 
 function nextQ() {
     if(curIdx < curTest.length - 1) loadQ(curIdx+1);
+    else if(curIdx === curTest.length - 1) generateReport();
+}
+
+function prevQ() {
+    if(curIdx > 0) loadQ(curIdx-1);
 }
 
 // --- REPORTING LOGIC ---
